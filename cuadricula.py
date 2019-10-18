@@ -85,8 +85,8 @@ while not condicion:
     pygame.draw.line(screen, black, (500/3, 0), (500/3, 600))
     pygame.draw.line(screen, black, (1000/3, 0), (1000/3, 600))
     pygame.draw.line(screen, black, (499, 600/4), (499, 1800/4))
-    
-    
+   
+    #numeros
     screen.blit(text1, textRect1)
     screen.blit(text2, textRect2)
     screen.blit(text3, textRect3)
