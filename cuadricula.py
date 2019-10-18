@@ -7,20 +7,25 @@ Created on Fri Oct 18 11:03:57 2019
 
 import pygame
 
+#Creando la pantalla
 ancho = 500 
 alto = 600
 screen = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("Proyecto Lógica II")
 
+#Medidas para el posicionamiento de los números
 anchito = ancho/6
 altico = alto/8
 
+#Condición para el funcionamiento de Pygame
 condicion = False
 
+#Colores
 background_color = (255, 255, 255)
 white = (255, 255, 255)
 black = (0, 0, 0)
 
+#Posiciones correspondientes al centro de cada cuadrícula
 pos_a = (anchito*3, altico)
 pos_b = (anchito, altico*3)
 pos_c = (anchito*3, altico*3)
@@ -30,9 +35,11 @@ pos_f = (anchito*3, altico*5)
 pos_g = (anchito*5, altico*5)
 pos_h = (anchito*3, altico*7)
 
+#Inicializando font, definiendo tipo de letra y tamaño
 pygame.font.init()
-
 font = pygame.font.Font('freesansbold.ttf', 64)
+
+#Definiendo los números del 1 al 8
 text1 = font.render("1", True, black, white)
 text2 = font.render("2", True, black, white)
 text3 = font.render("3", True, black, white)
@@ -51,6 +58,7 @@ textRect6 = text6.get_rect()
 textRect7 = text7.get_rect()
 textRect8 = text8.get_rect()
 
+#Posicionando los números en cada una de las cuadrículas
 textRect1.center = pos_c
 textRect2.center = pos_h
 textRect3.center = pos_d
@@ -60,17 +68,18 @@ textRect6.center = pos_e
 textRect7.center = pos_a
 textRect8.center = pos_f
 
-
+#Inicializando Pygame
 pygame.init()
 
-
 while not condicion:
-    
+   
+    #Cerrando el programa cuando se pulsa la x de salir
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
     
+    #Rellenando el fondo de la pantalla
     screen.fill(background_color)
     
     #Líneas horizontales
