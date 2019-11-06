@@ -19,8 +19,16 @@ def decodificar(n):
     fila = (num//8)+1
     return columna,fila
 
+#CORREGIR ESTA FUNCIÓN
+def cod_letra(columna,fila):
+    n = fila*columna
+    n -= 1
+    return chr(256+n)
+
 Letras = codificar()
 print(Letras)
 
-prueba = decodificar('Ĉ')
+prueba = decodificar('Ā')
 print(prueba)
+
+print(cod_letra(3,6))
