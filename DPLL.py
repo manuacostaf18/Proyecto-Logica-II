@@ -95,6 +95,7 @@ def DPLL(S, I):
 
 
 
+
 S1 = [['p'], ['-p', 'q'], ['-q', 'r', 's'], ['u', '-s', 'r'], ['r', 't'], ['p', 's', '-t'], ['-r', 'u']]
 prueba1 = unit_propagate(S1, {})
 print("prueba1: ", prueba1)
