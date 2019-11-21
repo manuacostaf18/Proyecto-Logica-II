@@ -222,7 +222,7 @@ def Inorder(arbol):
 	else:
 		print("Oops, rotulo incorrecto")
 
-def diccionario(dic):
+def diccionario(dic): #retorna un diccionario con los valores de las 64 letras proposicionales. 
     d = {}
     for n in dic.keys():
         if n in letras:
