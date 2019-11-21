@@ -244,11 +244,17 @@ def balanced(f):
 	else:
 		return False
     
-def diccionario_true(dic):
+def diccionario_true(dic): #retorna un diccionario sólo con las letras que tienen valor 1. 
     d = {}
     for n in dic.keys():
         if dic[n] == 1:
             d[n] = dic[n]
+    return d
+    
+def lista_true(dic): #retorna una lista con las letras que tienen valor 1.
+    d = []
+    for n in dic.keys():
+        d.append(n)
     return d
             
 letras = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]
@@ -340,7 +346,7 @@ prueba2 = regla_a + regla_h + '*'
 prueba3 = regla_a + regla_b + regla_g + regla_h + '***'
 prueba4 = regla_a + regla_b + regla_d + '**'
 
-rprueba = string2Tree(prueba4)
+rprueba = string2Tree(regla)
 r = Inorder(rprueba)
 print(r)
 prueba_tseitin = Tseitin(r, letras)
@@ -354,5 +360,8 @@ print('Valores de las letras:', dic_prueba)
 #print(len(dic_prueba))
 dic_final = diccionario_true(dic_prueba)
 print('')
-print('Letras con True:', dic_final)
+print('Diccionario letras con True:', dic_final)
 #print(len(dic_final))
+lista = lista_true(dic_final)
+print('')
+print('Lista letras con true:', lista)
