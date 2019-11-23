@@ -233,8 +233,12 @@ def Inorder(arbol):
 	else:
 		print("Oops, rotulo incorrecto")
 
+<<<<<<< HEAD
 
 def diccionario(dic):
+=======
+def diccionario(dic): #retorna un diccionario con los valores de las 64 letras proposicionales. 
+>>>>>>> fda5d478632b48534e5e7a75602a8569fabe063e
     d = {}
     for n in dic.keys():
         if n in letras:
@@ -256,16 +260,31 @@ def balanced(f):
 		return True
 	else:
 		return False
+<<<<<<< HEAD
 
 
 def diccionario_true(dic):
+=======
+    
+def diccionario_true(dic): #retorna un diccionario sólo con las letras que tienen valor 1. 
+>>>>>>> fda5d478632b48534e5e7a75602a8569fabe063e
     d = {}
     for n in dic.keys():
         if dic[n] == 1:
             d[n] = dic[n]
     return d
+<<<<<<< HEAD
 
 
+=======
+    
+def lista_true(dic): #retorna una lista con las letras que tienen valor 1.
+    d = []
+    for n in dic.keys():
+        d.append(n)
+    return d
+            
+>>>>>>> fda5d478632b48534e5e7a75602a8569fabe063e
 letras = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]
 
 regla_a1 = 'l-k-j-h-g-f-e-d-c-b-3-U-N-F-x-p-i-a*****************'
@@ -397,7 +416,10 @@ prueba4 = regla_h + regla_g + '*'
 #g = 46 
 #h = 47
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fda5d478632b48534e5e7a75602a8569fabe063e
 rprueba = string2Tree(regla)
 r = Inorder(rprueba)
 print("------------------------------------")
@@ -417,6 +439,7 @@ dic_prueba = diccionario(prueba_dpll[1])
 #print('Valores de las letras:', dic_prueba)
 #print(len(dic_prueba))
 dic_final = diccionario_true(dic_prueba)
+<<<<<<< HEAD
 print('------------------------------------')
 print('Letras con True:', dic_final)
 print("longitud de el diccionario final")
@@ -426,3 +449,11 @@ print(len(dic_final))
 
 
 
+=======
+print('')
+print('Diccionario letras con True:', dic_final)
+#print(len(dic_final))
+lista = lista_true(dic_final)
+print('')
+print('Lista letras con true:', lista)
+>>>>>>> fda5d478632b48534e5e7a75602a8569fabe063e
