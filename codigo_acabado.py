@@ -1,6 +1,46 @@
 from copy import deepcopy
 import sys
+import pygame
+
 sys.setrecursionlimit(10000)
+
+
+class Tree():#Clase árbol.
+    def __init__(self,label,iz,der):
+        self.label = label
+        self.left = iz
+        self.right = der
+
+
+def string2Tree(A):#Convierte una cadena de string en un objeto árbol.
+    conectivos = ["*","+",">"]
+    stack = []
+    for c in A:
+        if c in letras:
+            stack.append(Tree(c,None,None))
+        elif c == "-":
+            formaux = Tree(c, None, stack[-1])
+            del stack[-1]
+            stack.append(formaux)
+        elif c in conectivos:
+            formaux = Tree(c, stack[-1], stack[-2])
+            del stack[-1]
+            del stack[-1]
+            stack.append(formaux)
+    return stack[-1]
+
+
+def Inorder(arbol):#Retorna la forma 'inorder' de un árbol.
+	conectivosBinarios = ["*","+",">"]
+	if arbol.label in letras:
+		return arbol.label
+	elif arbol.label == "-":
+		return arbol.label+Inorder(arbol.right)
+	elif arbol.label in conectivosBinarios:
+		return "("+Inorder(arbol.left)+arbol.label+Inorder(arbol.right)+")"
+	else:
+		print("Oops, rotulo incorrecto")
+
 
 def hay_clausula_unit(lista):#Retorna true si hay una cláusula unitaria.
 	for n in lista:
@@ -11,7 +51,7 @@ def hay_clausula_unit(lista):#Retorna true si hay una cláusula unitaria.
 
 
 def complemento(n):#Retorna el complemento de la cláusula unitaria ingresada. 
-	x = n#[0]
+	x = n
 	if x[0] == '-':
 		return x[1]
 	else:
@@ -196,41 +236,7 @@ def formaClausal(A):#Retorna la forma clausal de una fórmula.
     return "OK"
 
 
-class Tree():#Clase árbol.
-    def __init__(self,label,iz,der):
-        self.label = label
-        self.left = iz
-        self.right = der
 
-
-def string2Tree(A):#Convierte una cadena de string en un objeto árbol.
-    conectivos = ["*","+",">"]
-    stack = []
-    for c in A:
-        if c in letras:
-            stack.append(Tree(c,None,None))
-        elif c == "-":
-            formaux = Tree(c, None, stack[-1])
-            del stack[-1]
-            stack.append(formaux)
-        elif c in conectivos:
-            formaux = Tree(c, stack[-1], stack[-2])
-            del stack[-1]
-            del stack[-1]
-            stack.append(formaux)
-    return stack[-1]
-
-
-def Inorder(arbol):#Retorna la forma 'inorder' de un árbol.
-	conectivosBinarios = ["*","+",">"]
-	if arbol.label in letras:
-		return arbol.label
-	elif arbol.label == "-":
-		return arbol.label+Inorder(arbol.right)
-	elif arbol.label in conectivosBinarios:
-		return "("+Inorder(arbol.left)+arbol.label+Inorder(arbol.right)+")"
-	else:
-		print("Oops, rotulo incorrecto")
 
 
 def diccionario(dic): #retorna un diccionario con los valores de las 64 letras proposicionales. 
@@ -392,3 +398,121 @@ print(len(dic_final))
 lista = lista_true(dic_final)
 print('')
 print('Lista letras con true:', lista)
+
+
+"""graficando con pygame"""
+#Creando la pantalla
+ancho = 500 
+alto = 600
+screen = pygame.display.set_mode((ancho, alto))
+pygame.display.set_caption("Proyecto Lógica II")
+condicion = False
+
+
+#Colores
+background_color = (255, 255, 255)
+white = (255, 255, 255)
+black = (0, 0, 0)
+
+#Posiciones correspondientes para cualquier numero en cada casilla
+pos_a = (ancho*3/6, alto/8)
+pos_b = (ancho/6, alto*3/8)
+pos_c = (ancho*3/6, alto*3/8)
+pos_d = (ancho*5/6, alto*3/8)
+pos_e = (ancho/6, alto*5/8)
+pos_f = (ancho*3/6, alto*5/8)
+pos_g = (ancho*5/6, alto*5/8)
+pos_h = (ancho*3/6, alto*7/8)
+
+
+#Inicializando tipo de fuente, definiendo tipo de letra y tamaño
+pygame.font.init()
+font = pygame.font.Font('freesansbold.ttf', 64)
+
+
+#Definiendo los números del 1 al 8
+for i in range(1,9):
+	exec('text{} = font.render("{}", True, black, white)'.format(i, str(i)))
+
+for n in range(1,9):
+	exec('textRect{} = text{}.get_rect()'.format(n, n))
+
+
+def pos_num(lista, letras):
+#optinen una asignacion para cada numero en su respectva casilla que depende de la lista de entrada
+	letras_aux = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+	count = 0
+	for q in lista:
+		for x in letras:
+			if q == x:
+				count = letras.index(x)
+				letra = (count%8) 	   #columna
+				numero = (count//8)+1  #fila
+				exec('textRect{}.center = pos_{}'.format(numero, letras_aux[letra])) 
+
+
+pos_num(lista, letras)
+
+
+#Inicializando Pygame
+pygame.init()
+
+while not condicion:
+   
+    #Cerrando el programa cuando se pulsa la x de salir
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    
+    #Rellenando el fondo de la pantalla
+    screen.fill(background_color)
+    
+    #Líneas horizontales
+    pygame.draw.line(screen, black, (ancho/3, 0), (2*ancho/3, 0))
+    pygame.draw.line(screen, black, (0, alto/4), (ancho, alto/4))
+    pygame.draw.line(screen, black, (0, 2*alto/4), (ancho, 2*alto/4))
+    pygame.draw.line(screen, black, (0, 3*alto/4), (ancho, 3*alto/4))
+    pygame.draw.line(screen, black, (ancho/3, alto-1), (2*ancho/3, alto-1))
+    
+    #Líneas verticales
+    pygame.draw.line(screen, black, (0, alto/4), (0, 3*alto/4))
+    pygame.draw.line(screen, black, (ancho/3, 0), (ancho/3, alto))
+    pygame.draw.line(screen, black, (2*ancho/3, 0), (2*ancho/3, alto))
+    pygame.draw.line(screen, black, (ancho-1, alto/4), (ancho-1, 3*alto/4))
+   
+    #Números
+    screen.blit(text1, textRect1)
+    screen.blit(text2, textRect2)
+    screen.blit(text3, textRect3)
+    screen.blit(text4, textRect4)
+    screen.blit(text5, textRect5)
+    screen.blit(text6, textRect6)
+    screen.blit(text7, textRect7)
+    screen.blit(text8, textRect8)
+    
+    pygame.display.flip()
+    pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
